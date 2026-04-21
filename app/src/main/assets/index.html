@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#1a1a1a; color:white; font-family:sans-serif; padding:20px;">
+    <div id="chat" style="height:80vh; overflow-y:auto;"></div>
+    <input id="in" style="width:70%; background:#333; color:white; padding:10px;">
+    <button onclick="ask()">Kirim</button>
+    <script>
+        const API_KEY = "INSERT_API_KEY_HERE"; // Ini akan diganti otomatis oleh GitHub Action
+        async function ask() {
+            const val = document.getElementById('in').value;
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                method: "POST", headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ contents: [{ parts: [{ text: val }] }] })
+            });
+            const data = await res.json();
+            document.getElementById('chat').innerHTML += `<div><b>Pilot:</b> ${data.candidates[0].content.parts[0].text}</div>`;
+        }
+    </script>
+</body>
+</html>

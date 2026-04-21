@@ -12,35 +12,36 @@ Aplikasi ini menerapkan standar keamanan **Self-Hosted**. API Key Gemini milikmu
 
 ## instalasi cepat (dengan link)
 [masuk ke link ini:(https://github.com/apps/ChatBotGemini/installations/new)]
-## ⚙️ Cara Instalasi & Konfigurasi
 
-### 1. Persiapan
-Pastikan kamu sudah menginstal [Node.js](https://nodejs.org/) di perangkatmu.
+---
 
+# untuk menggunakan ChatBotGemini di repomu harus menggunakan workflows ini:
 ```bash
-# Clone repositori
-git clone [https://github.com/hastagaming/ChatBotGemini.git](https://github.com/hastagaming/ChatBotGemini.git)
-cd ChatBotGemini
-
-# Install dependensi
-npm install
-
-### 2.Konfigurasi (The Setup Wizard)
-​Kita menggunakan local setup wizard agar kamu tidak perlu
-mengedit file konfigurasi secara manual.
-# 1.jalankan skrip setup:
-```bash
-node setup.cjs
+.github/workflows/ai-reply.yml
 ```
-# 2.Buka browser dan akses: http://localhost:3000
-# 3.Masukkan Gemini API Key milikmu dan klik OK.
-# 4.Selesai! File .env akan dibuat secara otomatis.
-
-### 3.Menjalankan bot
-#setelah konfigurasi selesai, jalankan bot:
+# secretnya harus seperti ini:
+nama secret: MODEL_CHANGER
+isinya:
 ```bash
-npm start
+ Model: 'gemini-1.5-pro'
+ 'AIzaSyAxxxxxxxxxxxxxxx'
 ```
+# dengan workflows ini(namanya harus sama yaitu ai-reply.yml) isi dengan ini:
+```bash
+name: 'Gemini Issue Bot'
+description: 'Bot otomatis untuk menjawab issue menggunakan AI Gemini'
+inputs:
+  gemini_api_key:
+    description: 'Masukkan API Key Gemini kalian'
+    required: true
+runs:
+  using: 'node20'
+  main: 'bot.js'
+  env:
+    MODEL_CHANGER_RAW: ${{ inputs.model_changer }}
+```
+
+---
 
 ## 🛠️ Pengembangan
 ​Bot ini dibangun menggunakan Probot dan Google Generative AI SDK.

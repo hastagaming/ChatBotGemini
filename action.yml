@@ -1,0 +1,24 @@
+name: 'Gemini AI Assistant'
+description: 'Bot otomatis dengan fitur ganti model lewat satu Secret'
+inputs:
+  model_changer:
+    description: 'Isi dengan format Model: \'nama\' dan \'api_key\''
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install Dependencies
+      run: npm install
+      shell: bash
+      working-directory: ${{ github.action_path }}
+    - name: Run Bot
+      run: node bot.js
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      env:
+        MODEL_CHANGER_RAW: ${{ inputs.model_changer }}
+        GITHUB_TOKEN: ${{ github.token }}
