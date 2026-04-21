@@ -1,2 +1,17 @@
-.env
+# Node.js
 node_modules/
+npm-debug.log
+yarn-error.log
+
+# Lingkungan & Keamanan (SANGAT PENTING!)
+.env
+.env.local
+*.secret
+secrets.json
+config.json
+
+# File Sistem (Opsional tapi rapi)
+.DS_Store
+Thumbs.db
+*~
+*.swp
