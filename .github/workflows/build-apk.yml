@@ -1,15 +1,28 @@
 name: Build APK
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Kita kunci semua perintah agar berjalan di dalam folder android-app
+    defaults:
+      run:
+        working-directory: ./android-app
+
     steps:
       - uses: actions/checkout@v4
+
+      # Android butuh Java untuk bisa di-build
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Inject API Key
         run: sed -i 's/INSERT_API_KEY_HERE/${{ secrets.GEMINI_API_KEY }}/g' app/src/main/assets/index.html
 
-      - name: gradle permission
+      - name: Grant permission
         run: chmod +x gradlew
 
       - name: Build APK
@@ -19,4 +32,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Pilot-Assistant
-          path: app/build/outputs/apk/debug/app-debug.apk
+          # Path harus mengarah dari root repositori
+          path: android-app/app/build/outputs/apk/debug/app-debug.apk
