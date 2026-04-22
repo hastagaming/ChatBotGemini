@@ -20,18 +20,15 @@ jobs:
           java-version: '17'
 
       - name: Inject API Key
-        # Kita edit index.html yang ada di root
         run: sed -i 's/INSERT_API_KEY_HERE/${{ secrets.GEMINI_API_KEY }}/g' index.html
 
       - name: Prepare Android Assets
         run: |
-          # Buat folder assets jika belum ada
           mkdir -p app/src/main/assets/
-          # Salin index.html dari root ke folder assets Android
           cp index.html app/src/main/assets/index.html
 
-       - name: Grant Permission
-         run: chmod +x gradlew
+      - name: Grant Permission
+        run: chmod +x gradlew
 
       - name: Build APK
         run: ./gradlew assembleDebug
