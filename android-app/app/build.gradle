@@ -5,6 +5,16 @@ plugins {
 android {
     namespace "com.chatbot.gemini"
 
+    buildTypes {
+        debug {
+            buildConfigField "String", "GEMINI_API_KEY", "\"${System.env.GEMINI_API_KEY}\""
+        }
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
     compileSdkVersion 34
     defaultConfig {
         applicationId "com.chatbot.gemini"
