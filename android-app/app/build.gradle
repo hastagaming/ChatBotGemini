@@ -3,6 +3,8 @@ plugins {
 }
 
 android {
+    namespace "com.chatbot.gemini"
+
     compileSdkVersion 34
     defaultConfig {
         applicationId "com.chatbot.gemini"
