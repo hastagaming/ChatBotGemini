@@ -25,7 +25,7 @@ jobs:
       - name: Prepare Android Assets
         run: |
           mkdir -p app/src/main/assets/
-          cp index.html app/src/main/assets/index.html
+          cp $GITHUB_WORKSPACE/index.html app/src/main/assets/index.html
 
       - name: Grant Permission
         run: chmod +x gradlew
