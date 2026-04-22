@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Inject API Key
-        run: sed -i 's/INSERT_API_KEY_HERE/${{ secrets.GEMINI_API_KEY }}/g' index.html
+        run: sed -i 's/INSERT_API_KEY_HERE/${{ secrets.GEMINI_API_KEY }}/g' $GITHUB_WORKSPACE/index.html
 
       - name: Prepare Android Assets
         run: |
